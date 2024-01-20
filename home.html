@@ -108,11 +108,13 @@
     </nav>
 
     <main>
+        {% for file_name in file_names %}
         <div class="post">
-            <h2>Post Title 1</h2>
+            <h2>{{ file_name }}</h2>
             <p>Post description goes here...</p>
-            <img src="https://placekitten.com/300/200" alt="Post Image">
+            <img src="{{ url_for('static', filename=file_name) }}" alt="{{ file_name }}">
         </div>
+        {% endfor %}
 
         <div class="post">
             <h2>Post Title 2</h2>
