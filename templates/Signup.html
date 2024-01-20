@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, index-scale=1.0">
     <title>Responsive Web Page</title>
 
     <style>
@@ -72,6 +72,12 @@
             display: block;
             margin: 0 auto;
         }
+        .cont1 {
+    display: grid;
+    align-items: top;
+    grid-template-columns: 1fr 1fr 1fr;
+    column-gap: 50px;
+  }
 
         @media only screen and (max-width: 768px) {
             nav a:not(.menu-icon) {
@@ -97,58 +103,49 @@
 <body>
 
     <header>
-        <h1>Responsive Web Page</h1>
+        <h1>ReSearchIt</h1>
     </header>
 
-    <nav>
-        <div class="menu-icon">&#9776;</div>
-        <a href="#">Home</a>
-        <a href="#">About</a>
-        {% if lab_id > 0 %}
-        <form action="/open_upload" method="post" enctype="multipart/form-data">
-        
-            <input type="hidden" id="user_id" name="user_id" value="{{ user_id }}">
-            <input type="hidden" id="lab_id" name="lab_id" value="{{ lab_id }}">
-            <input type="submit" value="Create Post">
-        </form>
-        {% endif %}
+    <div class="cont1">
 
-    </nav>
+    <img src="https://cdn4.iconfinder.com/data/icons/laboratory-27/512/Laboratory_Icons3-24-512.png" alt="icon">
+    <form method="post" action="/home">
+        <input type="hidden" id="type" name="type" value="0">
+        <label>Name</label>
+        <input type="text" name="name"><br>
+        <label>Email</label>
+        <input type="text" name="email"><br>
+      <label>Username</label><br>
+      <input type="text" name="username"><br>
+      <label>Password:</label><br>
+      <input type="password" name="password"><br>
+      <label>Lab ID</label>
+      <input type="INT" name="lab_id"><br>
+      <input type="hidden" name="id" value="1">
+      <button type="submit" style="position: relative;top:10px;">Login</button>
+    </form>
 
-    <main>
-        {% for file_name in file_names %}
-            <div class="post">
-                <h2>{{ file_name }}</h2>
-                <p>Post description goes here...</p>
-                
-                {% if file_name.lower().startswith(('p')) %}
-                    <!-- Display image -->
-                    <img src="{{ url_for('static', filename='posts/' + file_name) }}" alt="{{ file_name }}">
-                {% elif file_name.lower().startswith(('v')) %}
-                    <!-- Display video -->
-                    <video width="320" height="240" controls>
-                        <source src="{{ url_for('static', filename='posts/' + file_name) }}" type="video/mp4">
-                        Your browser does not support the video tag.
-                    </video>
-                {% else %}
-                    <!-- Unknown file type -->
-                    <p>Unsupported file type</p>
-                {% endif %}
-            </div>
-        {% endfor %}
-    </main>
-    
-
- 
-
-
-<!-- ... (your existing HTML code) ... -->
-
-
+   
+    {% with messages = get_flashed_messages(with_categories=true) %}
+  {% if messages %}
+    <ul class="flash" style=" color:black;position: relative;" >
+      
+        <li>{{ messages[-1][1] }}</li>
+         </ul>
+  {% endif %}
+{% endwith %}
+  </div>
+  </div>
+   
 
 
     
+
+    
+
 
 </body>
 
 </html>
+              
+     

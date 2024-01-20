@@ -8,7 +8,13 @@
 <body>
     <h1>Image Upload</h1>
     <form action="/upload_post" method="post" enctype="multipart/form-data">
-        <input type="file" name="file" accept="image/*" required>
+        <input type="hidden" id="user_id" name="user_id" value="{{ user_id }}">
+        <label for="description">Description:</label>
+        <textarea id="description" name="description" rows="4" required></textarea>
+        
+        <label for="file">Select Image:</label>
+        <input type="file" id="file" name="file" accept="image/*" required>
+        
         <input type="submit" value="Upload">
     </form>
 </body>

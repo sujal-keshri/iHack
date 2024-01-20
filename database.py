@@ -34,6 +34,12 @@ cursor.execute('''
 ''')
 
 conn.commit()
+
+cursor.execute("insert into labs(lab_name) values('cvit')")
+cursor.execute("insert into labs(lab_name) values('precog')")
+cursor.execute("insert into labs(lab_name) values('cvest')")
+
+conn.commit()
 conn.close()
 
 print("Database 'research.db' and tables created successfully.")
