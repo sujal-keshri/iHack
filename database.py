@@ -18,7 +18,7 @@ cursor.execute('''
     CREATE TABLE IF NOT EXISTS posts (
         post_id INTEGER PRIMARY KEY AUTOINCREMENT,
         time TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-        text_desc TEXT NOT NULL,
+        text_desc TEXT,
         username TEXT NOT NULL,
         file_name TEXT,
         type TEXT,

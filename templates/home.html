@@ -112,7 +112,7 @@
         <div class="post">
             <h2>{{ file_name }}</h2>
             <p>Post description goes here...</p>
-            <img src="{{ url_for('static', filename=file_name) }}" alt="{{ file_name }}">
+            <img src="{{ url_for('static', filename='posts/' + file_name) }}" alt="{{ file_name }}">
         </div>
         {% endfor %}
 
