@@ -190,7 +190,7 @@ def upload():
         cursor = conn.cursor()
 
         cursor.execute('''
-            INSERT INTO posts (text_desc, username, file_name, type)
+            INSERT INTO posts (text_desc, user_id, file_name, type)
             VALUES (?, ?, ?, ?)
         ''', (text_desc, user_id, new_filename, type))
 
@@ -201,10 +201,93 @@ def upload():
 
 @app.route('/open_upload', methods=['POST'])
 def open_upload():
-    user_id = request.form['user_id']
-    lab_id = request.form['lab_id']
+    user_id = request.form.get('user_id')
+    lab_id = request.form.get('lab_id')
+    lab_id=int(lab_id)
     return render_template('upload.html', user_id=user_id, lab_id=lab_id)
 
+@app.route('/open_research_list', methods=['POST'])
+def open_research_list():
+    # user_id = request.form['user_id']
+    # lab_id = request.form['lab_id']
+    user_id = request.form.get('user_id')
+    lab_id = request.form.get('lab_id')
+    lab_id=int(lab_id)
+    
+    conn = sqlite3.connect(DATABASE)  # Replace with your actual database file
+    cursor = conn.cursor()
+
+    # Fetch lab names from the labs table
+    try:
+        cursor.execute('SELECT lab_id, lab_name FROM labs')
+        labs = [(int(row[0]), row[1]) for row in cursor.fetchall()]
+        # print("Labs:", labs)
+    except sqlite3.Error as e:
+        labs = []
+        print("Error fetching labs:", e)
+
+    # Close the connection
+    conn.close()
+    # print(labs[0][0])
+    # print(labs[1][0])
+    # print(labs[2][0])
+    return render_template('researchlist.html', user_id=user_id, lab_id=lab_id, labs=labs)
+
+
+# @app.route('/Labss1', methods=['POST','GET'])
+# def Labss1():
+#     conn = sqlite3.connect('research.db')
+#     cursor = conn.cursor()
+#     file_namess=cursor.execute('''SELECT file_name FROM posts WHERE user_id IN (SELECT user_id FROM users WHERE lab_id=1)''' )
+#     file_names=()
+#     for x in file_namess:
+#         file_names=x+file_names
+#     UID=get_UID()-1
+
+#     D=cursor.execute('''SELECT lab_id FROM users WHERE user_id=?''',(UID,))
+
+#     for x in D:
+#         lab_id=x[0]
+
+#     print('cdscds',UID,lab_id)
+#     return render_template('Labs1.html',User_id=UID,lab_id=lab_id,file_names=file_names)
+
+# @app.route('/Labs1')
+# def Labs1():
+#     return render_template('Labs1.html')
+
+@app.route('/open_research_lab', methods=['POST'])
+def open_research_lab():
+    # Extract user_id and lab_id from the form data
+    print("Inside")
+    user_id = request.form.get('user_id')
+    lab_id = request.form.get('lab_id')
+    lab_id=int(lab_id)
+    lab_no = request.form.get('lab_no')
+    lab_no=int(lab_no)
+    # print(lab_no)
+    # Add any logic to fetch data for the lab page based on user_id and lab_id
+    # For example, you can query the database to get lab details
+
+    # Render the lab page with the provided data
+    # page_name='l'+str(lab_no)+'.html'
+    # return render_template(page_name, user_id=user_id, lab_id=lab_id, lab_no=lab_no)
+
+    conn = sqlite3.connect('research.db')
+    cursor = conn.cursor()
+    file_namess=cursor.execute(f'SELECT file_name FROM posts WHERE user_id IN (SELECT user_id FROM users WHERE lab_id={lab_no})' )
+    file_names=()
+    for x in file_namess:
+        file_names=x+file_names
+    UID=get_UID()-1
+
+    D=cursor.execute('''SELECT lab_id FROM users WHERE user_id=?''',(UID,))
+
+    for x in D:
+        lab_id=x[0]
+
+    print('cdscds',UID,lab_id)
+    return render_template('lab.html',User_id=UID,lab_id=lab_id,file_names=file_names, lab_no=lab_no)
 
 if __name__ == '__main__':
     app.run(debug=True)

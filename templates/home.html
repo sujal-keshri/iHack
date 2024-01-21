@@ -1,163 +1,273 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Responsive Web Page</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+    }
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+    }
 
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f4f4f4;
-        }
+    .navbar {
+      /* background-color: #c8b2b2; */
+      padding: 15px;
+      overflow: hidden;
+    }
 
-        header {
-            background-color: #333;
-            padding: 15px;
-            text-align: center;
-            color: white;
-        }
+    .navbar a {
+      float: left;
+      display: block;
+      color: black;
+      text-align: center;
+      padding: 14px 16px;
+      text-decoration: none;
+    }
 
-        nav {
-            display: flex;
-            justify-content: space-between;
-            background-color: #444;
-            padding: 10px;
-        }
+    .navbar a:hover {
+      background-color: rgb(29, 125, 161);
+      color: black;
+    }
 
-        nav a {
-            color: white;
-            text-decoration: none;
-            padding: 10px;
-        }
+    .navbar .icon {
+      display: none;
+    }
 
-        nav a:hover {
-            background-color: #555;
-        }
+    @media screen and (max-width: 600px) {
+      .navbar a:not(:first-child) {display: none;}
+      .navbar a.icon {
+        float: right;
+        display: block;
+      }
+    }
 
-        .menu-icon {
-            display: none;
-            cursor: pointer;
-            font-size: 1.5em;
-        }
+    @media screen and (max-width: 600px) {
+      .navbar.responsive {
+        position: relative;
+      }
+      .navbar.responsive a.icon {
+        position: absolute;
+        right: 0;
+        top: 0;
+      }
+      .navbar.responsive a {
+        float: none;
+        display: block;
+        text-align: left;
+      }
+    }
 
-        main {
-            padding: 20px;
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: space-around;
-            align-items: flex-start;
-        }
+    .container {
+      /* max-width: 800px;
+       */
+       width:60%;
+      margin: 0 auto;
+      padding: 20px;
+      text-align: center;
+      /* background-color:rgb(135, 228, 242); */
+      border-radius: 10px; /* Rounded corners */
+      box-shadow: 10 10 10px rgba(165, 25, 25, 0.1);
+    }
 
-        .post {
-            max-width: 600px; /* Adjust the maximum width as needed */
-            width: 100%;
-            margin-bottom: 20px;
-            border: 1px solid #ddd;
-            padding: 10px;
-            background-color: white;
-        }
+    .media-item {
+      width: 70%;
+      max-width: 600px; /* Adjust the max-width as needed */
+      margin: 0 auto;
+      display: block;
+      margin-bottom: 10%;
+      margin-top: 10%;
 
-        .post h2 {
-            margin-top: 0;
-        }
+      border-radius: 8px; /* Rounded corners for images and videos */
+      box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+    }
+    .media-container {
+        position: relative;
+        background-color: rgb(158, 224, 224);
+        width: 60%; /* Set width to 60% of the container */
+      margin: 0 auto; /* Center the media container */
+      margin-bottom: 20px; /* Add margin between media containers */
+      overflow: hidden; /* Clear the float */
+      text-align: center;
+      border-radius: 8px; 
+      box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+      /* text-align: left; */
+    }
+    .post-description {
+      margin-top: 10px; /* Add space between media item and description */
+      font-size: 0.6em;
+    }
+    .user-info-container {
+      display: flex;
+      align-items: center;
+      margin-bottom: 1px; /* Add space between user info and description */
+      background-color: grey;
+      padding: 2%;
+    }
 
-        .post img,
-        .post video {
-            max-width: 100%;
-            height: auto;
-            display: block;
-            margin: 0 auto;
-        }
+    .user-profile {
+      width: 20px; /* Adjust the width of the profile photo */
+      height: 20px; /* Adjust the height of the profile photo */
+      border-radius: 50%; /* Make it a circle */
+      overflow: hidden; /* Ensure the image stays within the border-radius */
+      margin-right: 2%; /* Add space between profile pic and text */
+    }
 
-        @media only screen and (max-width: 768px) {
-            nav a:not(.menu-icon) {
-                display: none;
-            }
+    .user-profile img {
+      width: 100%; /* Ensure the image fills the container */
+      height: 100%; /* Ensure the image fills the container */
+      object-fit: cover; /* Cover the entire container while maintaining aspect ratio */
+    }
 
-            .menu-icon {
-                display: block;
-            }
-
-            main {
-                flex-direction: column;
-                align-items: center;
-            }
-
-            .post {
-                max-width: 100%;
-            }
-        }
-    </style>
+    .user-info {
+      flex-grow: 1; /* Allow the info to grow and take available space */
+      font-size: 0.4em;
+      text-align: left;
+    }
+    .user-info p {
+      margin: 0; /* Remove default margin to decrease spacing between lines */
+    }
+    @media (min-width: 600px) {
+      .media-item {
+        /* width: 50%; */
+        display: inline-block;
+        width: 80%;
+        height: 400px; /* Set a specific height as needed */
+        object-fit: cover; /* This property ensures the aspect ratio is maintained */
+        margin: 0 auto;
+        margin-top: 20px;
+        margin-bottom: 20px;
+        /* display: block; */
+      }
+      .user-info {
+        font-size: 0.8em;
+      }
+      .user-profile{
+        width: 30px; /* Adjust the width of the profile photo */
+        height: 30px;
+      }
+    }
+    @media (min-width: 600px) {
+        .post-description {
+        font-size: 1.2em; /* Adjust font size for larger screens */
+      }
+    }
+   
+  </style>
 </head>
-
 <body>
-
-    <header>
-        <h1>Responsive Web Page</h1>
-    </header>
-
-    <nav>
-        <div class="menu-icon">&#9776;</div>
-        <a href="#">Home</a>
+    <div class="navbar" id="myNavbar">
+        <a href="#" class="active">Home</a>
         <a href="#">About</a>
-        {% if lab_id > 0 %}
-        <form action="/open_upload" method="post" enctype="multipart/form-data">
-        
-            <input type="hidden" id="user_id" name="user_id" value="{{ user_id }}">
-            <input type="hidden" id="lab_id" name="lab_id" value="{{ lab_id }}">
-            <input type="submit" value="Create Post">
-        </form>
-        {% endif %}
+        <a href='#' onclick="redirectToCreatePost('{{ user_id }}', '{{ lab_id }}')"> Create Post </a>
+        <a href='#' onclick="redirectToResearchList('{{ user_id }}', '{{ lab_id }}')"> Research Labs </a>
+        <a href="javascript:void(0);" class="icon" onclick="myFunction()">
+          &#9776;
+        </a>
+      </div>
 
-    </nav>
-
-    <main>
+      <hr>
+      <div class="container">
         {% for file_name in file_names %}
-            <div class="post">
-                <h2>{{ file_name }}</h2>
-                <p>Post description goes here...</p>
-                
-                {% if file_name.lower().startswith(('p')) %}
-                    <!-- Display image -->
-                    <img src="{{ url_for('static', filename='posts/' + file_name) }}" alt="{{ file_name }}">
-                {% elif file_name.lower().startswith(('v')) %}
-                    <!-- Display video -->
-                    <video width="320" height="240" controls>
-                        <source src="{{ url_for('static', filename='posts/' + file_name) }}" type="video/mp4">
-                        Your browser does not support the video tag.
-                    </video>
-                {% else %}
-                    <!-- Unknown file type -->
-                    <p>Unsupported file type</p>
-                {% endif %}
-            </div>
-        {% endfor %}
-    </main>
-    
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            const menuIcon = document.querySelector('.menu-icon');
-            const navLinks = document.querySelectorAll('nav a:not(.menu-icon)');
+        <div class="media-container">
+            <div class="user-info-container">
+                <div class="user-profile">
+                  <img src="../static/posts/unknown.jpeg" alt="Profile Photo">
+                </div>
+                <div class="user-info">
+                  <p>Username</p>
+                  <p>Timestamp</p>
+                </div>
+              </div>
+              <div class="post-description">
+                <p>This is the description for Photo 1.</p>
+              </div>
+          <!-- <img class="media-item" src="q3_1.png" alt="Photo 1"> -->
+          {% if file_name.lower().startswith(('p')) %}
+        <!-- Display image -->
+        <img class="media-item" src="{{ url_for('static', filename='posts/' + file_name) }}" alt="{{ file_name }}">
+      {% elif file_name.lower().startswith(('v')) %}
+        <!-- Display video -->
+        <div class="media-item video-item">
+          <video width="320" height="240" controls>
+            <source src="{{ url_for('static', filename='posts/' + file_name) }}" type="video/mp4">
+            Your browser does not support the video tag.
+          </video>
+        </div>
+      {% else %}
+        <!-- Unknown file type -->
+        <p>Unsupported file type</p>
+          
+        </div>
+        {% endif %}
+        <!-- Add more photos and videos as needed -->
+      </div>
+      {% endfor %}
 
-            menuIcon.addEventListener('click', function () {
-                navLinks.forEach(link => link.style.display = link.style.display === 'none' ? 'block' : 'none');
-            });
-        });
+<script>
+    function myFunction() {
+      var x = document.getElementById("myNavbar");
+      if (x.className === "navbar") {
+        x.className += " responsive";
+      } else {
+        x.className = "navbar";
+      }
+    }
+
+    function redirectToResearchList(user_id, lab_id) {
+      // Create a form element
+      const form = document.createElement('form');
+      form.action = '/open_research_list';  // Replace with the actual Flask route for lab page
+      form.method = 'post';
+
+      // Create hidden input for user_id
+      const userIdInput = document.createElement('input');
+      userIdInput.type = 'hidden';
+      userIdInput.name = 'user_id';
+      userIdInput.value = user_id;  // Replace with actual user_id
+      form.appendChild(userIdInput);
+
+      // Create hidden input for lab_id
+      const labIdInput = document.createElement('input');
+      labIdInput.type = 'hidden';
+      labIdInput.name = 'lab_id';
+      labIdInput.value = lab_id;  // Replace with actual lab_id
+      form.appendChild(labIdInput);
+
+      // Submit the form
+      document.body.appendChild(form);
+      form.submit();
+  }
+
+
+  function redirectToCreatePost(user_id, lab_id) {
+    // Create a form element
+    const form = document.createElement('form');
+    form.action = '/open_upload';  // Replace with the actual Flask route for lab page
+    form.method = 'post';
+
+    // Create hidden input for user_id
+    const userIdInput = document.createElement('input');
+    userIdInput.type = 'hidden';
+    userIdInput.name = 'user_id';
+    userIdInput.value = user_id;  // Replace with actual user_id
+    form.appendChild(userIdInput);
+
+    // Create hidden input for lab_id
+    const labIdInput = document.createElement('input');
+    labIdInput.type = 'hidden';
+    labIdInput.name = 'lab_id';
+    labIdInput.value = lab_id;  // Replace with actual lab_id
+    form.appendChild(labIdInput);
+
+    // Submit the form
+    document.body.appendChild(form);
+    form.submit();
+}
     </script>
- 
-
-
-<!-- ... (your existing HTML code) ... -->
-
-
-
-
-    
-
 </body>
-
 </html>

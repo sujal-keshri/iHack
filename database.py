@@ -19,10 +19,10 @@ cursor.execute('''
         post_id INTEGER PRIMARY KEY AUTOINCREMENT,
         time TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
         text_desc TEXT,
-        username TEXT NOT NULL,
+        user_id INT NOT NULL,
         file_name TEXT,
         type TEXT,
-        FOREIGN KEY (username) REFERENCES users(username)
+        FOREIGN KEY (user_id) REFERENCES users(user_id)
     )
 ''')
 
