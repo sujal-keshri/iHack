@@ -184,15 +184,15 @@
 
       <hr>
       <div class="container">
-        {% for file_name in file_names %}
+        {% for name, file_name, time in files %}
         <div class="media-container">
             <div class="user-info-container">
                 <div class="user-profile">
                   <img src="../static/posts/unknown.jpeg" alt="Profile Photo">
                 </div>
                 <div class="user-info">
-                  <p>Username</p>
-                  <p>Timestamp</p>
+                  <p>{{ name }}</p>
+                  <p>{{ time }}</p>
                 </div>
               </div>
               <div class="post-description">

@@ -30,26 +30,49 @@ def get_UID():
 
     return UID
 
+# def fetch_file_names():
+#     # Connect to the database
+#     conn = sqlite3.connect('research.db')
+#     cursor = conn.cursor()
+
+#     # Fetch file names sorted by time
+#     cursor.execute('''
+#         SELECT file_name FROM posts
+#         ORDER BY time DESC
+#     ''')
+
+#     # Fetch all results into a list
+#     result = cursor.fetchall()
+
+#     # Close the database connection
+#     conn.close()
+
+#     # Extract file names from the result
+#     file_names = [row[0] for row in result]
+#     return file_names
+
+import sqlite3
+
 def fetch_file_names():
     # Connect to the database
     conn = sqlite3.connect('research.db')
     cursor = conn.cursor()
 
-    # Fetch file names sorted by time
+    # Fetch file names and timestamps sorted by time
     cursor.execute('''
-        SELECT file_name FROM posts
-        ORDER BY time DESC
+        SELECT users.name, posts.file_name, posts.time
+        FROM posts
+        JOIN users ON posts.user_id = users.user_id
+        ORDER BY posts.time DESC
     ''')
 
-    # Fetch all results into a list
-    result = cursor.fetchall()
+    # Fetch all results into a list of tuples
+    files = cursor.fetchall()
 
     # Close the database connection
     conn.close()
 
-    # Extract file names from the result
-    file_names = [row[0] for row in result]
-    return file_names
+    return files
 
 @app.route('/home',methods=['POST'])
 def home():
@@ -77,8 +100,8 @@ def home():
                 for x in ul:
                     UID,lab_id=x
                 
-                file_names=fetch_file_names()
-                return render_template('home.html',user_id=UID,lab_id=lab_id,file_names=file_names)
+                files=fetch_file_names()
+                return render_template('home.html',user_id=UID,lab_id=lab_id, files=files)
             conn.close()
         else:
             conn = sqlite3.connect('research.db')
