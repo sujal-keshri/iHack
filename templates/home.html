@@ -138,7 +138,16 @@
         {% endfor %}
     </main>
     
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const menuIcon = document.querySelector('.menu-icon');
+            const navLinks = document.querySelectorAll('nav a:not(.menu-icon)');
 
+            menuIcon.addEventListener('click', function () {
+                navLinks.forEach(link => link.style.display = link.style.display === 'none' ? 'block' : 'none');
+            });
+        });
+    </script>
  
 
 
