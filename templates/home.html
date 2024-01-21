@@ -156,6 +156,18 @@
         font-size: 1.2em; /* Adjust font size for larger screens */
       }
     }
+    .like-container {
+      display: flex;
+      align-items: center;
+      justify-content: center; /* Align items horizontally to the center */
+      margin-top: 10px;
+      background-color: rgb(203, 200, 200);
+    }
+
+    .like-button {
+      margin-right: 10px;
+      cursor: pointer;
+    }
    
   </style>
 </head>
@@ -184,7 +196,7 @@
                 </div>
               </div>
               <div class="post-description">
-                <p>This is the description for Photo 1.</p>
+                <p>This is the description for Photo 1e etgjtg trgrtjgetrg rjghtr t grtigethg rtgejt grt gjtrhgjtrjg tgje tgjrt .</p>
               </div>
           <!-- <img class="media-item" src="q3_1.png" alt="Photo 1"> -->
           {% if file_name.lower().startswith(('p')) %}
@@ -197,7 +209,9 @@
             <source src="{{ url_for('static', filename='posts/' + file_name) }}" type="video/mp4">
             Your browser does not support the video tag.
           </video>
+          
         </div>
+        
       {% else %}
         <!-- Unknown file type -->
         <p>Unsupported file type</p>
@@ -205,6 +219,10 @@
         </div>
         {% endif %}
         <!-- Add more photos and videos as needed -->
+        <div class="like-container">
+            <div class="like-button" onclick="like('{{ file_name }}')">❤️ Like</div>
+            <p id="like-count-{{ file_name }}">0 Likes</p>
+          </div>
       </div>
       {% endfor %}
 
