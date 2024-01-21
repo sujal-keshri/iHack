@@ -3,17 +3,81 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Image Upload</title>
+    <title>Create Post</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(to right, #85d8ce, #6495ed);
+            margin: 0;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+        }
+
+        h1 {
+            text-align: center;
+            color: #000;
+        }
+
+        form {
+            max-width: 500px;
+            width: 100%;
+            background-color: rgba(255, 255, 255, 0.8);
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+        }
+
+        label {
+            display: block;
+            margin-bottom: 12px;
+            color: #333;
+            font-size: 18px;
+        }
+
+        textarea,
+        input[type="file"] {
+            width: 100%;
+            padding: 14px;
+            margin-bottom: 20px;
+            border: 1px solid #4CAF50;
+            border-radius: 8px;
+            box-sizing: border-box;
+            font-size: 16px;
+            color: #555;
+        }
+
+        textarea {
+            resize: vertical;
+        }
+
+        input[type="submit"] {
+            background: linear-gradient(to right, #4CAF50, #45a049);
+            color: #fff;
+            padding: 16px 24px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 18px;
+            transition: background 0.3s;
+        }
+
+        input[type="submit"]:hover {
+            background: linear-gradient(to right, #45a049, #4CAF50);
+        }
+    </style>
 </head>
 <body>
-    <h1>Image Upload</h1>
     <form action="/upload_post" method="post" enctype="multipart/form-data">
+        <h1>Create Post</h1>
         <input type="hidden" id="user_id" name="user_id" value="{{ user_id }}">
-        <label for="description">Description:</label>
-        <textarea id="description" name="description" rows="4" required></textarea>
+        <label for="description">Caption (optional):</label>
+        <textarea id="description" name="description" rows="6"></textarea>
         
-        <label for="file">Select Image:</label>
-        <input type="file" id="file" name="file" accept="image/*" required>
+        <label for="file">Select Media (image or video):</label>
+        <input type="file" id="file" name="file" accept="image/*, video/*">
         
         <input type="submit" value="Upload">
     </form>

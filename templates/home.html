@@ -8,7 +8,7 @@
       background-color: #333;
       color: white;
       text-align: center;
-      padding: 2%;
+      padding: 0.2%;
       font-size: 1.2em;
     }
     body {
@@ -186,10 +186,10 @@
 </head>
 <body>
   <div class="research-strip">
-    Research It
+    <h1> ReSearchIt </h1>
 </div>
     <div class="navbar" id="myNavbar">
-        <a href="#" class="active">Home</a>
+        <a href='#' onclick="redirectToHome('{{ user_id }}', '{{ lab_id }}')"> Home </a>
         <a href="#">About</a>
         <a href='#' onclick="redirectToCreatePost('{{ user_id }}', '{{ lab_id }}')"> Create Post </a>
         <a href='#' onclick="redirectToResearchList('{{ user_id }}', '{{ lab_id }}')"> Research Labs </a>
@@ -200,7 +200,7 @@
 
       
       <div class="container">
-        {% for name, file_name, time in files %}
+        {% for name, file_name, time, text_desc in files %}
         <div class="media-container">
             <div class="user-info-container">
                 <div class="user-profile">
@@ -212,7 +212,7 @@
                 </div>
               </div>
               <div class="post-description">
-                <p>This is the description for Photo 1e etgjtg trgrtjgetrg rjghtr t grtigethg rtgejt grt gjtrhgjtrjg tgje tgjrt .</p>
+                <p>{{ text_desc }}</p>
               </div>
           <!-- <img class="media-item" src="q3_1.png" alt="Photo 1"> -->
           {% if file_name.lower().startswith(('p')) %}
@@ -301,6 +301,31 @@
     // Submit the form
     document.body.appendChild(form);
     form.submit();
+}
+
+function redirectToHome(user_id, lab_id) {
+  // Create a form element
+  const form = document.createElement('form');
+  form.action = '/home_nav';  // Replace with the actual Flask route for lab page
+  form.method = 'post';
+
+  // Create hidden input for user_id
+  const userIdInput = document.createElement('input');
+  userIdInput.type = 'hidden';
+  userIdInput.name = 'user_id';
+  userIdInput.value = user_id;  // Replace with actual user_id
+  form.appendChild(userIdInput);
+
+  // Create hidden input for lab_id
+  const labIdInput = document.createElement('input');
+  labIdInput.type = 'hidden';
+  labIdInput.name = 'lab_id';
+  labIdInput.value = lab_id;  // Replace with actual lab_id
+  form.appendChild(labIdInput);
+
+  // Submit the form
+  document.body.appendChild(form);
+  form.submit();
 }
     </script>
 </body>

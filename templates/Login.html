@@ -4,6 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, index-scale=1.0">
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
     <title>Responsive Web Page</title>
 
     <style>
@@ -11,7 +13,7 @@
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #f4f4f4;
+            background: linear-gradient(to right, #85d8ce, #6495ed);
         }
 
         header {
@@ -74,10 +76,64 @@
         }
         .cont1 {
     display: grid;
-    align-items: top;
-    grid-template-columns: 1fr 1fr 1fr;
+    align-items: center;
+    grid-template-columns:  0.8fr 1fr;
     column-gap: 50px;
   }
+  .cont2 {
+    width: 300px;
+    height: 350px;
+    border-radius: 10px;
+    background-color: rgba(0, 0, 0, 0.7); /* Black with 70% opacity */
+    color: white; /* Text color */
+}
+
+.cont2 form {
+    padding: 20px; /* Adjust padding as needed */
+}
+
+.cont2 label {
+    color: white; /* Label text color */
+}
+
+.cont2 input {
+    margin-bottom: 10px;
+}
+
+.cont2 button {
+    position: relative;
+    top: 10px;
+    background-color: #007BFF; /* Button background color */
+    color: white; /* Button text color */
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.cont2 button:hover {
+    background-color: #0056b3; /* Darker color on hover */
+}
+
+.cont2 .flash {
+    position: relative;
+    color: black;
+}
+
+.cont2 .flash li {
+    list-style-type: none;
+    margin-bottom: 5px;
+}
+
+.cont2 .flash a {
+    color: cadetblue;
+    text-decoration: none;
+}
+
+.cont2 .flash a:hover {
+    text-decoration: underline;
+}
+
 
         @media only screen and (max-width: 768px) {
             nav a:not(.menu-icon) {
@@ -103,15 +159,20 @@
 <body>
 
     <header>
-        <h1>ReSearchIt</h1>
+        <link href='https://fonts.googleapis.com/css?family=Bungee Inline' rel='stylesheet'>
+        <h1>
+            <a style="font-family: 'Dosis', sans-serif;font-size: 50px;">ReSearchIt</a></h1>
     </header>
 
+    
     <div class="cont1">
 
-    <img src="https://cdn4.iconfinder.com/data/icons/laboratory-27/512/Laboratory_Icons3-24-512.png" alt="icon">
+    <img src="https://cdn4.iconfinder.com/data/icons/laboratory-27/512/Laboratory_Icons3-24-512.png" style="width: 350px;height:350px;border-radius: 50%;position:relative;top:100px;left:250px;" alt="icon">
+    <div class="cont2" style="position: relative;top: 100px;">
+        <h1 style="position:relative;left: 20px;">LOG IN</h1>
     <form method="post" action="/home">
         <input type="hidden" id="type" name="type" value="1">
-      <label>Username/Email</label><br>
+      <label>Username</label><br>
       <input type="text" name="username"><br>
       <label>Password:</label><br>
       <input type="password" name="password"><br>

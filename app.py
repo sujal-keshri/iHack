@@ -60,7 +60,7 @@ def fetch_file_names():
 
     # Fetch file names and timestamps sorted by time
     cursor.execute('''
-        SELECT users.name, posts.file_name, posts.time
+        SELECT users.name, posts.file_name, posts.time, posts.text_desc
         FROM posts
         JOIN users ON posts.user_id = users.user_id
         ORDER BY posts.time DESC
@@ -300,7 +300,7 @@ def open_research_lab():
     conn = sqlite3.connect('research.db')
     cursor = conn.cursor()
     cursor.execute(f'''
-        SELECT users.name, posts.file_name, posts.time
+        SELECT users.name, posts.file_name, posts.time, posts.text_desc
         FROM posts
         JOIN users ON posts.user_id = users.user_id where lab_id={lab_no}
         ORDER BY posts.time DESC
@@ -317,6 +317,17 @@ def open_research_lab():
 
     print('cdscds',UID,lab_id)
     return render_template('lab.html',User_id=UID,lab_id=lab_id,files=files, lab_no=lab_no,lab_name=lab_name)
+
+@app.route('/home_nav', methods=['POST'])
+def open_home_from_nav():
+    # user_id = request.form['user_id']
+    # lab_id = request.form['lab_id']
+    user_id = request.form.get('user_id')
+    lab_id = request.form.get('lab_id')
+    lab_id=int(lab_id)
+    
+    files=fetch_file_names()
+    return render_template('home.html',user_id=user_id,lab_id=lab_id, files=files)
 
 if __name__ == '__main__':
     app.run(debug=True)
