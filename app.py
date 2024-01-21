@@ -288,6 +288,7 @@ def open_research_lab():
     lab_id=int(lab_id)
     lab_no = request.form.get('lab_no')
     lab_no=int(lab_no)
+    lab_name=request.form.get('lab_name')
     # print(lab_no)
     # Add any logic to fetch data for the lab page based on user_id and lab_id
     # For example, you can query the database to get lab details
@@ -298,10 +299,15 @@ def open_research_lab():
 
     conn = sqlite3.connect('research.db')
     cursor = conn.cursor()
-    file_namess=cursor.execute(f'SELECT file_name FROM posts WHERE user_id IN (SELECT user_id FROM users WHERE lab_id={lab_no})' )
-    file_names=()
-    for x in file_namess:
-        file_names=x+file_names
+    cursor.execute(f'''
+        SELECT users.name, posts.file_name, posts.time
+        FROM posts
+        JOIN users ON posts.user_id = users.user_id where lab_id={lab_no}
+        ORDER BY posts.time DESC
+    ''')
+    # file_namess=cursor.execute(f'SELECT file_name FROM posts WHERE user_id IN (SELECT user_id FROM users WHERE lab_id={lab_no})' )
+    # 
+    files = cursor.fetchall()
     UID=get_UID()-1
 
     D=cursor.execute('''SELECT lab_id FROM users WHERE user_id=?''',(UID,))
@@ -310,7 +316,7 @@ def open_research_lab():
         lab_id=x[0]
 
     print('cdscds',UID,lab_id)
-    return render_template('lab.html',User_id=UID,lab_id=lab_id,file_names=file_names, lab_no=lab_no)
+    return render_template('lab.html',User_id=UID,lab_id=lab_id,files=files, lab_no=lab_no,lab_name=lab_name)
 
 if __name__ == '__main__':
     app.run(debug=True)
