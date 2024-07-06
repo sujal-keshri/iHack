@@ -1,4 +1,4 @@
-# iHack
+# ReasearchIt
 
 # ReSearchIt Documentation
 
