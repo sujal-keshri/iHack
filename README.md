@@ -69,4 +69,4 @@ ReSearchIt is designed to bridge the gap between students and research labs, pro
 Happy exploring and innovating with ReSearchIt!
 
 
-# Note: these all Functionalities are not implemented. A few are for future scope
+# Note: All these Functionalities are not implemented. A few are for future scope
